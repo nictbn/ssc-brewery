@@ -35,6 +35,7 @@ public class PasswordEncodingTests {
         System.out.println(ldap.encode(PASSWORD));
         String encodedPassword = ldap.encode(PASSWORD);
         assertTrue(ldap.matches(PASSWORD, encodedPassword));
+        System.out.println(ldap.encode("tiger"));
     }
 
     @Test
@@ -49,5 +50,6 @@ public class PasswordEncodingTests {
         PasswordEncoder bCrypt = new BCryptPasswordEncoder();
         System.out.println(bCrypt.encode(PASSWORD));
         System.out.println(bCrypt.encode(PASSWORD));
+        System.out.println(bCrypt.encode("guru"));
     }
 }
