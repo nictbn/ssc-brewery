@@ -14,7 +14,7 @@ import java.util.Set;
 public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String role;
 
