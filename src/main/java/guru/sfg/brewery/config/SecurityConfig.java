@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationManager(authenticationManager);
         return filter;
     }
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return SfgPasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -38,14 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.addFilterBefore(restHeaderAuthFilter(authenticationManager()),
-                UsernamePasswordAuthenticationFilter.class)
+                        UsernamePasswordAuthenticationFilter.class)
                 //CSRF CONFIG IS GLOBAL
-                        .csrf().disable();
+                .csrf().disable();
         httpSecurity.addFilterBefore(restUrlAuthFilter(authenticationManager()),
-                        UsernamePasswordAuthenticationFilter.class);
+                UsernamePasswordAuthenticationFilter.class);
         httpSecurity
                 .authorizeRequests(authorize -> {
                     authorize
+                            .antMatchers("/h2-console/**").permitAll() // not to be used in production
                             .antMatchers(
                                     "/",
                                     "/webjars/**",
@@ -64,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated().and()
                 .formLogin().and()
                 .httpBasic();
+        // h2 console config
+        httpSecurity.headers().frameOptions().sameOrigin();
     }
 
     @Override
