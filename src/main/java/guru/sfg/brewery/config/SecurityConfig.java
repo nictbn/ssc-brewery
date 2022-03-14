@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -70,19 +69,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().frameOptions().sameOrigin();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("spring")
-                .password("{bcrypt10}$2a$10$My87Kc9M0018R1oyqOFGlOPcihW6FFzb5buRzfQ9bUm4rZm.0Ksjy")
-                .roles("ADMIN")
-                .and()
-                .withUser("user")
-                .password("{sha256}71b9068383ef35c92454f7b39cd9b08009f292bfc4d4317f5d73d236f549b5535b7fffeb88224bee")
-                .roles("USER")
-                .and()
-                .withUser("scott")
-                .password("{bcrypt10}$2a$10$5mhf0FYmc.jr6.kqam2UdOxs5EWUlt5Nlb1ZMop0Vl70dF/ZzluJu")
-                .roles("CUSTOMER");
-    }
+//    @Autowired
+//    JpaUserDetailsService jpaUserDetailsService;
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("spring")
+//                .password("{bcrypt10}$2a$10$My87Kc9M0018R1oyqOFGlOPcihW6FFzb5buRzfQ9bUm4rZm.0Ksjy")
+//                .roles("ADMIN")
+//                .and()
+//                .withUser("user")
+//                .password("{sha256}71b9068383ef35c92454f7b39cd9b08009f292bfc4d4317f5d73d236f549b5535b7fffeb88224bee")
+//                .roles("USER")
+//                .and()
+//                .withUser("scott")
+//                .password("{bcrypt10}$2a$10$5mhf0FYmc.jr6.kqam2UdOxs5EWUlt5Nlb1ZMop0Vl70dF/ZzluJu")
+//                .roles("CUSTOMER");
+//    }
 }
