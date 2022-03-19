@@ -16,8 +16,8 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String role;
+    private String permission;
 
     @ManyToMany(mappedBy = "authorities")
-    Set<User> users;
+    Set<Role> roles;
 }
