@@ -37,10 +37,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-
-/**
- * Created by jt on 2019-01-26.
- */
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -209,13 +205,13 @@ public class DefaultBreweryLoader implements CommandLineRunner {
         Authority updateBeer = authorityRepository.save(Authority.builder().permission("beer.update").build());
         Authority readBeer = authorityRepository.save(Authority.builder().permission("beer.read").build());
         Authority deleteBeer = authorityRepository.save(Authority.builder().permission("beer.delete").build());
-
+        Authority pickupOrder = authorityRepository.save(Authority.builder().permission("order.pickup").build());
         // Customer Authorities
         Authority createCustomer = authorityRepository.save(Authority.builder().permission("customer.create").build());
         Authority updateCustomer = authorityRepository.save(Authority.builder().permission("customer.update").build());
         Authority readCustomer = authorityRepository.save(Authority.builder().permission("customer.read").build());
         Authority deleteCustomer = authorityRepository.save(Authority.builder().permission("customer.delete").build());
-
+        Authority pickupOrderCustomer = authorityRepository.save(Authority.builder().permission("customer.order.pickup").build());
         // Brewery Authorities
         Authority createBrewery = authorityRepository.save(Authority.builder().permission("brewery.create").build());
         Authority updateBrewery = authorityRepository.save(Authority.builder().permission("brewery.update").build());
@@ -253,7 +249,8 @@ public class DefaultBreweryLoader implements CommandLineRunner {
                 createOrder,
                 readOrder,
                 updateOrder,
-                deleteOrder
+                deleteOrder,
+                pickupOrder
         )));
         customerRole.setAuthorities(new HashSet<>(Set.of(
                 readBeer,
@@ -262,7 +259,8 @@ public class DefaultBreweryLoader implements CommandLineRunner {
                 createOrderCustomer,
                 readOrderCustomer,
                 updateOrderCustomer,
-                deleteOrderCustomer
+                deleteOrderCustomer,
+                pickupOrderCustomer
         )));
         userRole.setAuthorities(new HashSet<>(Set.of(readBeer)));
 
