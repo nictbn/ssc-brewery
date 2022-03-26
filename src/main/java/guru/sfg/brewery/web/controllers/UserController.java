@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/register2fa")
     public String register2Fa(Model model) {
         User user = getUser();
-        String url = GoogleAuthenticatorQRGenerator.getOtpAuthTotpURL(
+        String url = GoogleAuthenticatorQRGenerator.getOtpAuthURL(
                 "SFG",
                 user.getUsername(),
                 googleAuthenticator.createCredentials(user.getUsername())
@@ -55,7 +55,7 @@ public class UserController {
         return "user/verify2fa";
     }
 
-    @PostMapping
+    @PostMapping("/verify2fa")
     public String verifyPostOf2FA(@RequestParam Integer verifyCode) {
         User user = getUser();
         if (googleAuthenticator.authorizeUser(user.getUsername(), verifyCode)) {
