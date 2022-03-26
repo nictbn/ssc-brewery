@@ -63,6 +63,14 @@ public class User implements UserDetails, CredentialsContainer {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
+    @Builder.Default
+    private Boolean useGoogle2fa = false;
+
+    private String google2FaSecret;
+
+    @Transient
+    private Boolean google2FaRequired = true;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
